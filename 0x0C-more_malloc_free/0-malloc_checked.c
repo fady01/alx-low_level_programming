@@ -1,14 +1,15 @@
 #include <stdlib.h>
-#include "main.h"
 /**
- *malloc_checked - check for memory lcoa nd assgin it
- *@b : size of block
- *
- *Return: return void *
- */
+  * malloc_checked - allocates memory using malloc
+  * @b: size of buffer
+  * Return: pointer to buffer
+  */
 void *malloc_checked(unsigned int b)
 {
-	if (malloc(b))
-		return (malloc(b));
-	exit(98);
+	void *p;
+
+	p = malloc(b);
+	if (p == NULL)
+		exit(98);
+	return (p);
 }

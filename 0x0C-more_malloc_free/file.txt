@@ -1,0 +1,212 @@
+#include <stdlib.h>
+/**
+  * malloc_checked - allocates memory using malloc
+  * @b: size of buffer
+  * Return: pointer to buffer
+  */
+void *malloc_checked(unsigned int b)
+{
+	void *p;
+
+	p = malloc(b);
+	if (p == NULL)
+		exit(98);
+	return (p);
+}
+#include <stdlib.h>
+/**
+  * _realloc - reallocates a memory block
+  * @ptr: pointer to the original memory block
+  * @old_size: old size of memory block
+  * @new_size: new size of memory block
+  * Return: pointer to reallocated memory block
+  */
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+{
+	char *p, *castptr;
+	unsigned int i;
+
+	if (ptr != NULL && new_size == 0)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	if (new_size == old_size)
+		return (ptr);
+	if (ptr == NULL)
+	{
+		p = malloc(new_size);
+		return (p);
+	}
+	if (new_size > old_size)
+	{
+		p = malloc(new_size * sizeof(char));
+		castptr = ptr;
+		for (i = 0; i < old_size; i++)
+			p[i] = castptr[i];
+		free(ptr);
+		return (p);
+	}
+	return (ptr);
+}
+#include <stdlib.h>
+#include <stdio.h>
+/**
+  * _isdigit - tells if the string consists of digits
+  * @argv: pointer to current item in argument
+  * Return: return 0 if all digits, 1 if not all digits.
+  */
+int _isdigit(char *argv)
+{
+	int i;
+
+	i = 0;
+	while (argv[i])
+	{
+		if (argv[i] >= '0' && argv[i] <= '9')
+			i++;
+		else
+			return (1);
+	}
+	return (0);
+}
+/**
+  * _atoi - converts a string of ascii digits to the values they represent
+  * @s: pointer to the source string
+  * Return: value of digits
+  */
+int _atoi(char *s)
+{
+	int i, result;
+
+	i = result = 0;
+	while (s[i])
+	{
+		if (s[i] >= '0' && s[i] <= '9')
+		{
+			result *= 10;
+			result += (s[i] - '0');
+		}
+		i++;
+	}
+	return (result);
+}
+/**
+  * main - main function call
+  * @argc: argument count
+  * @argv: 2D array of arguments
+  * Return: return 0 on success, 98 on failure
+  */
+int main(int argc, char *argv[])
+{
+	int i;
+
+	malloc();
+	if (argc != 3)
+	{
+		printf("Error\n");
+		exit(98);
+	}
+	for (i = 1; i < argc; i++)
+	{
+		if (_isdigit(argv[i]))
+		{
+			printf("Error\n");
+			exit(98);
+		}
+	}
+	return (0);
+}
+#include <stdlib.h>
+#include <stdio.h>
+/**
+ * string_nconcat - concatenate two strings up to n bytes.
+ * @s1: source string
+ * @s2: string to truncate up to n bytes
+ * @n: number of bytes to truncate by
+ * Return: pointer to new buffer
+ */
+char *string_nconcat(char *s1, char *s2, unsigned int n)
+{
+	char *p;
+	unsigned int s1count, s2count, sizeBuffer, i;
+
+	if (s1 == NULL)
+		s1 = "";
+	if (s2 == NULL)
+		s2 = "";
+	for (s1count = 0; s1[s1count]; s1count++)
+		;
+	for (s2count = 0; s2[s2count]; s2count++)
+		;
+	s2count > n ? (s2count = n) : (n = s2count);
+	sizeBuffer = s1count + s2count + 1;
+	p = malloc(sizeBuffer * sizeof(char));
+	if (p == NULL)
+		return (NULL);
+	for (i = 0; i < sizeBuffer - 1; i++)
+		i < s1count ? (p[i] = s1[i]) : (p[i] = s2[i - s1count]);
+	p[sizeBuffer] = '\0';
+	return (p);
+}
+#include <stdlib.h>
+/**
+  * _calloc - allocates memory for an initialized buffer
+  * @nmemb: number of memory bytes
+  * @size: number of data type bits
+  * Return: return pointer to initialized buffer
+  */
+void *_calloc(unsigned int nmemb, unsigned int size)
+{
+	int *p;
+	unsigned int i;
+
+	if (nmemb == 0 || size == 0)
+		return (NULL);
+	p = malloc(size * nmemb);
+	if (p == NULL)
+		return (NULL);
+	for (i = 0; i < nmemb ; i++)
+		p[i] = 0;
+	return (p);
+}
+#include <stdlib.h>
+#include <stdio.h>
+/**
+  * _abs - get absolute value
+  * @n: number to calculate
+  * Return: absolute value of the number
+  */
+int _abs(int n)
+{
+	n < 0 ? (n *= -1) : (n = n);
+	return (n);
+}
+/**
+  * array_range - creates an array of integers
+  * @min: minimum value
+  * @max: maximum value
+  * Return: pointer to array of integers
+  */
+int *array_range(int min, int max)
+{
+	int *p;
+	int range, i;
+
+	if (min > max)
+		return (NULL);
+	range = max - min + 1;
+	p = malloc(range * sizeof(*p));
+	if (p == NULL)
+		return (NULL);
+	for (i = 0; i < range; min++, i++)
+		p[i] = min;
+	return (p);
+}
+int main(){
+	return 0;}
+#include "main.h"
+int _putchar(char c)
+{
+return(write(1, &c, 1));
+}

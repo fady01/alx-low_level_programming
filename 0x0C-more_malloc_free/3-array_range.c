@@ -1,33 +1,26 @@
+#include "main.h"
 #include <stdlib.h>
-#include <stdio.h>
+
 /**
-  * _abs - get absolute value
-  * @n: number to calculate
-  * Return: absolute value of the number
-  */
-int _abs(int n)
-{
-	n < 0 ? (n *= -1) : (n = n);
-	return (n);
-}
-/**
-  * array_range - creates an array of integers
-  * @min: minimum value
-  * @max: maximum value
-  * Return: pointer to array of integers
-  */
+ * array_range - Main Entry
+ * @min: input
+ * @max: input
+ * Return: 0
+ */
 int *array_range(int min, int max)
 {
-	int *p;
-	int range, i;
+	int i, l;
+	int *a;
 
 	if (min > max)
 		return (NULL);
-	range = max - min + 1;
-	p = malloc(range * sizeof(*p));
-	if (p == NULL)
+	l = max - min + 1;
+	a = malloc(sizeof(int) * l);
+	if (a == NULL)
 		return (NULL);
-	for (i = 0; i < range; min++, i++)
-		p[i] = min;
-	return (p);
+	for (i = 0; i < l; i++, min++)
+	{
+		a[i] = min;
+	}
+	return (a);
 }
